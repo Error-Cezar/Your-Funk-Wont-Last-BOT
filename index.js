@@ -5,7 +5,7 @@ console.log('loading...');
 
 // MODIFY THIS BEFORE RUNNING
 const censor = true // censor trigger
-const whitelist = false //channel whitelist (not done yet)
+const whitelist = false // channel whitelist (not done yet)
 const server = true // change name of the server
 const gomsg = "Let's funk !"
 // END OF MODIFY VALUE
