@@ -1,0 +1,23 @@
+{
+  "name": "yourcmwontlast",
+  "version": "1.0.0",
+  "description": "your cum wont last but discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "npm discord.js"
+  },
+  "keywords": [
+    "fu"
+  ],
+  "author": "Error-Cezar",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.1.0",
+    "dotenv": "^10.0.0"
+  }
+}
