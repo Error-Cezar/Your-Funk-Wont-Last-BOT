@@ -1,5 +1,9 @@
 # Your Funk Wont Last
-a thing that create channel with the lyrics of the song itself (im  bored-)
+A thing that create channel named from the lyrics of [your c*m wont last]( https://www.youtube.com/watch?v=7Do70nztRNE)
+
+# why
+i was bored
+
 # How to use it
 - Get the lastest version of node.js
 - Download or clone the repo 
