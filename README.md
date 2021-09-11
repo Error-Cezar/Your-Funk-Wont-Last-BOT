@@ -1,5 +1,5 @@
 # Your Funk Wont Last
-A kind of server destroyer that create channel with the lyrics of the song itself
+a thing that create channel with the lyrics of the song itself (im  bored-)
 # How to use it
 - Get the lastest version of node.js
 - Download or clone the repo 
